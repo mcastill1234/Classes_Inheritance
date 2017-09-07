@@ -1,7 +1,7 @@
 # 6.0001/6.00 Problem Set 5 - RSS Feed Filter
-# Name:
-# Collaborators:
-# Time:
+# Name: Mario Castillo
+# Collaborators: None
+# Time: Started: 09/05/2017. Finished:
 
 import feedparser
 import string
@@ -104,8 +104,10 @@ class PhraseTrigger(Trigger):
     def __init__(self, phrase):
         self.phrase = phrase.lower()
 
-    def evaluate(self, story):
-        return self.phrase in story.title
+    def is_phrase_in(self, story):
+        text = story.title.strip(string.punctuation)
+        return self.phrase in text
+
 
 
 # Problem 3
@@ -113,7 +115,8 @@ class PhraseTrigger(Trigger):
 
 
 class TitleTrigger(PhraseTrigger):
-    pass
+    def evaluate(self, story):
+        return self.is_phrase_in(story)
 
 
 
