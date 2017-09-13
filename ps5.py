@@ -104,11 +104,24 @@ class PhraseTrigger(Trigger):
     def __init__(self, phrase):
         self.phrase = phrase.lower()
 
-    def is_phrase_in(self, story):
-        text = story.title.strip(string.punctuation)
-        return self.phrase in text
-
-
+    def is_phrase_in(self, text):
+        """Takes phrase and text into lists to remove spaces and punctuation. Returns True if phrase is
+        explicitly in text, that is, singular and plurals are different items in the collection"""
+        ntext = ''
+        phrase_list = self.phrase.lower().split(' ')
+        for letter in text.lower():
+            if letter in string.punctuation:
+                ntext += ' '
+            else:
+                ntext += letter
+        text_list = ntext.split(' ')
+        while '' in text_list:
+            text_list.remove('')
+        if phrase_list[0] not in text_list:
+            return False
+        else:
+            start_index = text_list.index(phrase_list[0])
+            return phrase_list[:] == text_list[start_index:start_index + len(phrase_list)]
 
 # Problem 3
 # TODO: TitleTrigger
@@ -116,13 +129,15 @@ class PhraseTrigger(Trigger):
 
 class TitleTrigger(PhraseTrigger):
     def evaluate(self, story):
-        return self.is_phrase_in(story)
-
-
+        return self.is_phrase_in(story.get_title())
 
 
 # Problem 4
 # TODO: DescriptionTrigger
+
+class DescriptionTrigger(PhraseTrigger):
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_description())
 
 # TIME TRIGGERS
 

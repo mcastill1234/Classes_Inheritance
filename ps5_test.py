@@ -82,37 +82,37 @@ class ProblemSet5(unittest.TestCase):
             self.assertFalse(trig.evaluate(nospaces), "TitleTrigger fired when words were not separated by spaces or punctuation.")
             self.assertFalse(trig.evaluate(nothing), "TitleTrigger fired when none of the words in the phrase appeared.")
 
-    # def test2DescriptionTrigger(self):
-    #     cuddly    = NewsStory('', '', 'The purple cow is soft and cuddly.', '', datetime.now())
-    #     exclaim   = NewsStory('', '', 'Purple!!! Cow!!!', '', datetime.now())
-    #     symbols   = NewsStory('', '', 'purple@#$%cow', '', datetime.now())
-    #     spaces    = NewsStory('', '', 'Did you see a purple     cow?', '', datetime.now())
-    #     caps      = NewsStory('', '', 'The farmer owns a really PURPLE cow.', '', datetime.now())
-    #     exact     = NewsStory('', '', 'purple cow', '', datetime.now())
-    #
-    #     plural    = NewsStory('', '', 'Purple cows are cool!', '', datetime.now())
-    #     separate  = NewsStory('', '', 'The purple blob over there is cow.', '', datetime.now())
-    #     brown     = NewsStory('', '', 'How now brown cow.', '', datetime.now())
-    #     badorder  = NewsStory('', '', 'Cow!!! Purple!!!', '', datetime.now())
-    #     nospaces  = NewsStory('', '', 'purplecowpurplecowpurplecow', '', datetime.now())
-    #     nothing   = NewsStory('', '', 'I like poison dart frogs.', '', datetime.now())
-    #
-    #     s1 = DescriptionTrigger('PURPLE COW')
-    #     s2  = DescriptionTrigger('purple cow')
-    #     for trig in [s1, s2]:
-    #         self.assertTrue(trig.evaluate(cuddly), "DescriptionTrigger failed to fire when the phrase appeared in the description.")
-    #         self.assertTrue(trig.evaluate(exclaim), "DescriptionTrigger failed to fire when the words were separated by exclamation marks.")
-    #         self.assertTrue(trig.evaluate(symbols), "DescriptionTrigger failed to fire when the words were separated by assorted punctuation.")
-    #         self.assertTrue(trig.evaluate(spaces), "DescriptionTrigger failed to fire when the words were separated by multiple spaces.")
-    #         self.assertTrue(trig.evaluate(caps), "DescriptionTrigger failed to fire when the phrase appeared with both uppercase and lowercase letters.")
-    #         self.assertTrue(trig.evaluate(exact), "DescriptionTrigger failed to fire when the words in the phrase were the only words in the description.")
-    #
-    #         self.assertFalse(trig.evaluate(plural), "DescriptionTrigger fired when the words in the phrase were contained within other words.")
-    #         self.assertFalse(trig.evaluate(separate), "DescriptionTrigger fired when the words in the phrase were separated by other words.")
-    #         self.assertFalse(trig.evaluate(brown), "DescriptionTrigger fired when only part of the phrase was found.")
-    #         self.assertFalse(trig.evaluate(badorder), "DescriptionTrigger fired when the words in the phrase appeared out of order.")
-    #         self.assertFalse(trig.evaluate(nospaces), "DescriptionTrigger fired when words were not separated by spaces or punctuation.")
-    #         self.assertFalse(trig.evaluate(nothing), "DescriptionTrigger fired when none of the words in the phrase appeared.")
+    def test2DescriptionTrigger(self):
+        cuddly    = NewsStory('', '', 'The purple cow is soft and cuddly.', '', datetime.now())
+        exclaim   = NewsStory('', '', 'Purple!!! Cow!!!', '', datetime.now())
+        symbols   = NewsStory('', '', 'purple@#$%cow', '', datetime.now())
+        spaces    = NewsStory('', '', 'Did you see a purple     cow?', '', datetime.now())
+        caps      = NewsStory('', '', 'The farmer owns a really PURPLE cow.', '', datetime.now())
+        exact     = NewsStory('', '', 'purple cow', '', datetime.now())
+
+        plural    = NewsStory('', '', 'Purple cows are cool!', '', datetime.now())
+        separate  = NewsStory('', '', 'The purple blob over there is cow.', '', datetime.now())
+        brown     = NewsStory('', '', 'How now brown cow.', '', datetime.now())
+        badorder  = NewsStory('', '', 'Cow!!! Purple!!!', '', datetime.now())
+        nospaces  = NewsStory('', '', 'purplecowpurplecowpurplecow', '', datetime.now())
+        nothing   = NewsStory('', '', 'I like poison dart frogs.', '', datetime.now())
+
+        s1 = DescriptionTrigger('PURPLE COW')
+        s2  = DescriptionTrigger('purple cow')
+        for trig in [s1, s2]:
+            self.assertTrue(trig.evaluate(cuddly), "DescriptionTrigger failed to fire when the phrase appeared in the description.")
+            self.assertTrue(trig.evaluate(exclaim), "DescriptionTrigger failed to fire when the words were separated by exclamation marks.")
+            self.assertTrue(trig.evaluate(symbols), "DescriptionTrigger failed to fire when the words were separated by assorted punctuation.")
+            self.assertTrue(trig.evaluate(spaces), "DescriptionTrigger failed to fire when the words were separated by multiple spaces.")
+            self.assertTrue(trig.evaluate(caps), "DescriptionTrigger failed to fire when the phrase appeared with both uppercase and lowercase letters.")
+            self.assertTrue(trig.evaluate(exact), "DescriptionTrigger failed to fire when the words in the phrase were the only words in the description.")
+
+            self.assertFalse(trig.evaluate(plural), "DescriptionTrigger fired when the words in the phrase were contained within other words.")
+            self.assertFalse(trig.evaluate(separate), "DescriptionTrigger fired when the words in the phrase were separated by other words.")
+            self.assertFalse(trig.evaluate(brown), "DescriptionTrigger fired when only part of the phrase was found.")
+            self.assertFalse(trig.evaluate(badorder), "DescriptionTrigger fired when the words in the phrase appeared out of order.")
+            self.assertFalse(trig.evaluate(nospaces), "DescriptionTrigger fired when words were not separated by spaces or punctuation.")
+            self.assertFalse(trig.evaluate(nothing), "DescriptionTrigger fired when none of the words in the phrase appeared.")
 
     # def test3altBeforeAndAfterTrigger(self):
     #
