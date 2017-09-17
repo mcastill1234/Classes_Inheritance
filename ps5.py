@@ -54,9 +54,6 @@ def process(url):
 
 # Problem 1
 
-# TODO: NewsStory
-
-
 class NewsStory(object):
     def __init__(self, guid, title, description, link, pubdate):
         self.guid = guid
@@ -97,8 +94,6 @@ class Trigger(object):
 # PHRASE TRIGGERS
 
 # Problem 2
-# TODO: PhraseTrigger
-
 
 class PhraseTrigger(Trigger):
     def __init__(self, phrase):
@@ -106,7 +101,7 @@ class PhraseTrigger(Trigger):
 
     def is_phrase_in(self, text):
         """Takes phrase and text into lists to remove spaces and punctuation. Returns True if phrase is
-        explicitly in text, that is, singular and plurals are different items in the collection"""
+        explicitly in text, singular and plurals are different items in the collection"""
         ntext = ''
         phrase_list = self.phrase.lower().split(' ')
         for letter in text.lower():
@@ -120,36 +115,49 @@ class PhraseTrigger(Trigger):
         if phrase_list[0] not in text_list:
             return False
         else:
-            start_index = text_list.index(phrase_list[0])
-            return phrase_list[:] == text_list[start_index:start_index + len(phrase_list)]
+            for count in range(text_list.count(phrase_list[0])):
+                start_index = text_list.index(phrase_list[0])
+                if phrase_list[:] == text_list[start_index:start_index + len(phrase_list)]:
+                    return True
+                else:
+                    text_list.pop(start_index)
+            return False
 
 # Problem 3
-# TODO: TitleTrigger
-
 
 class TitleTrigger(PhraseTrigger):
     def evaluate(self, story):
         return self.is_phrase_in(story.get_title())
 
-
 # Problem 4
-# TODO: DescriptionTrigger
 
 class DescriptionTrigger(PhraseTrigger):
     def evaluate(self, story):
         return self.is_phrase_in(story.get_description())
 
+
 # TIME TRIGGERS
 
 # Problem 5
-# TODO: TimeTrigger
+
 # Constructor:
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 #        Convert time from string to a datetime before saving it as an attribute.
 
-# Problem 6
-# TODO: BeforeTrigger and AfterTrigger
+class TimeTrigger(Trigger):
+    def __init__(self, time):
+        self.time = datetime.strptime(time, "%d %b %Y %H:%M:%S").replace(tzinfo=pytz.timezone("EST"))
 
+
+# Problem 6
+
+class BeforeTrigger(TimeTrigger):
+    def evaluate(self, story):
+        return (self.time > story.get_pubdate().replace(tzinfo=pytz.timezone("EST")))
+
+class AfterTrigger(TimeTrigger):
+    def evaluate(self, story):
+        return (self.time < story.get_pubdate().replace(tzinfo=pytz.timezone("EST")))
 
 # COMPOSITE TRIGGERS
 
