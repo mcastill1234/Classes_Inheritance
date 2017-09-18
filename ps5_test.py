@@ -171,38 +171,38 @@ class ProblemSet5(unittest.TestCase):
         self.assertTrue(s2.evaluate(in_a_bit), "AfterTrigger failed to fire on news just after specified time")
         self.assertTrue(s2.evaluate(future), "AfterTrigger failed to fire on news from long ago")
 
-    # def test4NotTrigger(self):
-    #     n = NotTrigger(self.tt)
-    #     b = NewsStory("guid", "title", "description", "link", datetime.now())
-    #
-    #     self.assertFalse(n.evaluate(b), "A NOT trigger applied to 'always true' DID NOT return false")
-    #
-    #     y = NotTrigger(self.ft)
-    #     self.assertTrue(y.evaluate(b), "A NOT trigger applied to 'always false' DID NOT return true")
+    def test4NotTrigger(self):
+        n = NotTrigger(self.tt)
+        b = NewsStory("guid", "title", "description", "link", datetime.now())
 
-    # def test5AndTrigger(self):
-    #     yy = AndTrigger(self.tt, self.tt2)
-    #     yn = AndTrigger(self.tt, self.ft)
-    #     ny = AndTrigger(self.ft, self.tt)
-    #     nn = AndTrigger(self.ft, self.ft2)
-    #     b = NewsStory("guid", "title", "description", "link", datetime.now())
-    #
-    #     self.assertTrue(yy.evaluate(b), "AND of 'always true' and 'always true' should be true")
-    #     self.assertFalse(yn.evaluate(b), "AND of 'always true' and 'always false' should be false")
-    #     self.assertFalse(ny.evaluate(b), "AND of 'always false' and 'always true' should be false")
-    #     self.assertFalse(nn.evaluate(b), "AND of 'always false' and 'always false' should be false")
+        self.assertFalse(n.evaluate(b), "A NOT trigger applied to 'always true' DID NOT return false")
 
-    # def test6OrTrigger(self):
-    #     yy = OrTrigger(self.tt, self.tt2)
-    #     yn = OrTrigger(self.tt, self.ft)
-    #     ny = OrTrigger(self.ft, self.tt)
-    #     nn = OrTrigger(self.ft, self.ft2)
-    #     b = NewsStory("guid", "title", "description", "link", datetime.now())
-    #
-    #     self.assertTrue(yy.evaluate(b), "OR of 'always true' and 'always true' should be true")
-    #     self.assertTrue(yn.evaluate(b), "OR of 'always true' and 'always false' should be true")
-    #     self.assertTrue(ny.evaluate(b), "OR of 'always false' and 'always true' should be true")
-    #     self.assertFalse(nn.evaluate(b), "OR of 'always false' and 'always false' should be false")
+        y = NotTrigger(self.ft)
+        self.assertTrue(y.evaluate(b), "A NOT trigger applied to 'always false' DID NOT return true")
+
+    def test5AndTrigger(self):
+        yy = AndTrigger(self.tt, self.tt2)
+        yn = AndTrigger(self.tt, self.ft)
+        ny = AndTrigger(self.ft, self.tt)
+        nn = AndTrigger(self.ft, self.ft2)
+        b = NewsStory("guid", "title", "description", "link", datetime.now())
+
+        self.assertTrue(yy.evaluate(b), "AND of 'always true' and 'always true' should be true")
+        self.assertFalse(yn.evaluate(b), "AND of 'always true' and 'always false' should be false")
+        self.assertFalse(ny.evaluate(b), "AND of 'always false' and 'always true' should be false")
+        self.assertFalse(nn.evaluate(b), "AND of 'always false' and 'always false' should be false")
+
+    def test6OrTrigger(self):
+        yy = OrTrigger(self.tt, self.tt2)
+        yn = OrTrigger(self.tt, self.ft)
+        ny = OrTrigger(self.ft, self.tt)
+        nn = OrTrigger(self.ft, self.ft2)
+        b = NewsStory("guid", "title", "description", "link", datetime.now())
+
+        self.assertTrue(yy.evaluate(b), "OR of 'always true' and 'always true' should be true")
+        self.assertTrue(yn.evaluate(b), "OR of 'always true' and 'always false' should be true")
+        self.assertTrue(ny.evaluate(b), "OR of 'always false' and 'always true' should be true")
+        self.assertFalse(nn.evaluate(b), "OR of 'always false' and 'always false' should be false")
 
     # def test7FilterStories(self):
     #     tt = TitleTrigger("New York City")
